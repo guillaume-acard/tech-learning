@@ -3,7 +3,7 @@ TL.computerScene = {
   label: 'Inside a computer: CPU, RAM, disk, graphics card, Wi-Fi chip, screen, keyboard and mouse',
   viewBox: [0, 0, 1100, 600],
   background: [
-    { kind: 'rect', x: 360, y: 180, width: 520, height: 360, rx: 26, fill: 'rgba(10, 24, 44, 0.55)', stroke: 'rgba(56, 232, 255, 0.22)', strokeWidth: 2, label: 'MOTHERBOARD' },
+    { kind: 'rect', x: 360, y: 170, width: 520, height: 410, rx: 26, fill: 'rgba(10, 24, 44, 0.55)', stroke: 'rgba(56, 232, 255, 0.22)', strokeWidth: 2, label: 'MOTHERBOARD' },
   ],
   nodes: {
     keyboard: { x: 150, y: 100, icon: 'keyboard', label: 'Keyboard', sub: 'Input' },
