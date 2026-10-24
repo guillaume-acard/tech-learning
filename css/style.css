@@ -424,3 +424,18 @@ a.total:hover { box-shadow: 0 0 14px rgba(255, 163, 26, 0.4); }
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
 
+
+/* Topics */
+.topic { margin-top: 40px; }
+.topic-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.topic-title { margin: 0; color: var(--amber); font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em; }
+.topic > .blurb { margin: 10px 0 0; }
+.topic .chapter-list { margin-top: 16px; }
+main > .topic-title { margin: 34px 0 14px; }
+
+.topic-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 28px; }
+.topic-card { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); border-top: 3px solid var(--amber); overflow: hidden; text-decoration: none; color: inherit; transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s; }
+.topic-card:hover { transform: translateY(-2px); border-color: var(--amber); box-shadow: var(--glow); }
+.topic-cover { width: 100%; height: 190px; object-fit: cover; display: block; background: rgba(6, 11, 20, 0.8); }
+.topic-card-body { display: flex; flex-direction: column; gap: 10px; padding: 16px; }
+.topic-card-body .blurb { margin: 0; }

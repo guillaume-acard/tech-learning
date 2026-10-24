@@ -35,7 +35,7 @@
     const doneCount = all.filter(TL.progress.isDone).length;
     const main = el('main', {});
     main.append(
-      el('header', { class: 'lesson-head' }, el('a', { class: 'back', href: '#/', text: '\u2190 Chapters' }), el('h1', { text: 'My progress' })),
+      el('header', { class: 'lesson-head' }, el('a', { class: 'back', href: '#/', text: '\u2190 Home' }), el('h1', { text: 'My progress' })),
       el(
         'div',
         { class: 'prog-summary' },
@@ -43,9 +43,14 @@ el('div', { class: 'total', text: `${total} / ${maxStars} \u2605` }),
 el('p', { class: 'blurb', text: `${doneCount} of ${all.length} lessons finished.` })
       )
     );
+    let lastTopic = null;
     TL.chapters.forEach((ch) => {
       const ids = ch.lessons;
       if (!ids.length) return;
+      if (ch.topic !== lastTopic) {
+        lastTopic = ch.topic;
+        main.append(el('h2', { class: 'topic-title', text: ch.topic.title }));
+      }
       const got = ids.reduce((n, id) => n + TL.progress.stars(id), 0);
       const done = TL.progress.chapterComplete(ids);
       const section = el('section', { class: 'chapter' });
@@ -104,7 +109,98 @@ el('p', { class: 'blurb', text: `${doneCount} of ${all.length} lessons finished.
     current = null;
   }
 
-  function renderChapters() {
+  function chapterCard(ch) {
+    const got = starsTotal(ch.lessons);
+    const max = ch.lessons.length * 3;
+    const done = TL.progress.chapterComplete(ch.lessons);
+    return el(
+      'a',
+      { class: 'chapter-card' + (ch.comingSoon ? ' soon' : ''), href: `#/chapter/${ch.id}` },
+      ch.cover ? el('img', { class: 'chapter-cover', src: ch.cover, alt: `${ch.title} cover` }) : null,
+      el(
+        'div',
+        {},
+        el(
+          'div',
+          { class: 'chapter-head' },
+          el('h2', { text: ch.title }),
+          done ? el('span', { class: 'badge', text: 'Chapter complete!' }) : null,
+          ch.comingSoon ? el('span', { class: 'badge soon', text: 'Coming soon' }) : null
+        ),
+        el('p', { class: 'blurb', text: ch.blurb }),
+        el(
+          'div',
+          { class: 'chapter-meta' },
+          el('span', { class: 'pill', text: `${ch.lessons.length} lessons` }),
+          el('span', { class: 'pill star-total', text: `${got} / ${max} \u2605` })
+        )
+      )
+    );
+  }
+
+  const topicLessons = (topic) => topic.chapters.flatMap((ch) => ch.lessons);
+
+  function topicCard(topic) {
+    const lessonIds = topicLessons(topic);
+    return el(
+      'a',
+      { class: 'topic-card', href: `#/topic/${topic.id}` },
+      topic.cover ? el('img', { class: 'topic-cover', src: topic.cover, alt: `${topic.title} cover` }) : null,
+      el(
+        'div',
+        { class: 'topic-card-body' },
+        el('h2', { class: 'topic-title', text: topic.title }),
+        el('p', { class: 'blurb', text: topic.blurb }),
+        el(
+          'div',
+          { class: 'chapter-meta' },
+          el('span', { class: 'pill', text: `${topic.chapters.length} chapters, ${lessonIds.length} lessons` }),
+          el('span', { class: 'pill star-total', text: `${starsTotal(lessonIds)} / ${lessonIds.length * 3} ★` })
+        )
+      )
+    );
+  }
+
+  function renderTopic(topicId) {
+    const topic = TL.topics.find((t) => t.id === topicId);
+    if (!topic) return renderHome();
+
+    teardown();
+    TL.clear(app);
+    setTitle(topic.title);
+
+    const lessonIds = topicLessons(topic);
+    const main = el('main', {});
+    main.append(
+      el('header', { class: 'lesson-head' }, el('a', { class: 'back', href: '#/', text: '← Home' }), el('h1', { text: topic.title })),
+      el(
+        'div',
+        { class: 'chapter-hero' },
+        topic.cover ? el('img', { class: 'chapter-cover', src: topic.cover, alt: `${topic.title} cover` }) : null,
+        el(
+          'div',
+          {},
+          el('p', { class: 'blurb', text: topic.blurb }),
+          el(
+            'div',
+            { class: 'chapter-meta' },
+            el('span', { class: 'pill', text: `${topic.chapters.length} chapters, ${lessonIds.length} lessons` }),
+            el('span', { class: 'pill star-total', text: `${starsTotal(lessonIds)} / ${lessonIds.length * 3} ★` })
+          )
+        )
+      )
+    );
+    const list = el('div', { class: 'chapter-list' });
+    topic.chapters.forEach((ch) => list.append(chapterCard(ch)));
+    main.append(
+      list,
+      el('footer', { class: 'home-foot' }, el('a', { class: 'btn ghost', href: '#/progress', text: 'My progress' }))
+    );
+    app.append(main);
+    focusMain(main);
+  }
+
+  function renderHome() {
     teardown();
     TL.clear(app);
     setTitle('');
@@ -117,46 +213,14 @@ el('p', { class: 'blurb', text: `${doneCount} of ${all.length} lessons finished.
         'header',
         { class: 'home-head' },
         el('h1', { text: 'Tech Learning' }),
-        el('p', { class: 'tagline', text: 'See how computers, the internet and AI really work. Watch, play, then test yourself!' }),
+        el('p', { class: 'tagline', text: 'See how electronics, computers, the internet and AI really work. Watch, play, then test yourself!' }),
         el('a', { class: 'total', href: '#/progress', text: `Stars collected: ${total} \u2605` })
       )
     );
 
-    const list = el('div', { class: 'chapter-list' });
-
-    TL.chapters.forEach((ch) => {
-      const got = starsTotal(ch.lessons);
-      const max = ch.lessons.length * 3;
-      const done = TL.progress.chapterComplete(ch.lessons);
-
-      list.append(
-        el(
-          'a',
-          { class: 'chapter-card' + (ch.comingSoon ? ' soon' : ''), href: `#/chapter/${ch.id}` },
-          ch.cover ? el('img', { class: 'chapter-cover', src: ch.cover, alt: `${ch.title} cover` }) : null,
-          el(
-            'div',
-            {},
-            el(
-              'div',
-              { class: 'chapter-head' },
-              el('h2', { text: ch.title }),
-              done ? el('span', { class: 'badge', text: 'Chapter complete!' }) : null,
-              ch.comingSoon ? el('span', { class: 'badge soon', text: 'Coming soon' }) : null
-            ),
-            el('p', { class: 'blurb', text: ch.blurb }),
-            el(
-              'div',
-              { class: 'chapter-meta' },
-              el('span', { class: 'pill', text: `${ch.lessons.length} lessons` }),
-              el('span', { class: 'pill star-total', text: `${got} / ${max} \u2605` })
-            )
-          )
-        )
-      );
-    });
-
-    main.append(list);
+    const grid = el('div', { class: 'topic-grid' });
+    TL.topics.forEach((topic) => grid.append(topicCard(topic)));
+    main.append(grid);
 
     main.append(
       el(
@@ -172,7 +236,7 @@ el('p', { class: 'blurb', text: `${doneCount} of ${all.length} lessons finished.
 
   function renderChapter(chId) {
     const ch = TL.chapters.find((c) => c.id === chId);
-    if (!ch) return renderChapters();
+    if (!ch) return renderHome();
 
     teardown();
     TL.clear(app);
@@ -188,7 +252,7 @@ el('p', { class: 'blurb', text: `${doneCount} of ${all.length} lessons finished.
       el(
         'header',
         { class: 'lesson-head' },
-        el('a', { class: 'back', href: '#/', text: '\u2190 Chapters' }),
+        el('a', { class: 'back', href: `#/topic/${ch.topic.id}`, text: `\u2190 ${ch.topic.title}` }),
         el('h1', { text: ch.title })
       ),
       el(
@@ -258,7 +322,7 @@ el('p', { class: 'blurb', text: `${doneCount} of ${all.length} lessons finished.
   }
   function renderLesson(id) {
     const lesson = TL.lessons[id];
-    if (!lesson) return renderChapters();
+    if (!lesson) return renderHome();
     const chapter = chapterForLesson(id);
     teardown();
     TL.clear(app);
@@ -335,7 +399,7 @@ el('p', { class: 'blurb', text: `${doneCount} of ${all.length} lessons finished.
             { class: 'controls center' },
             el('button', { class: 'btn', text: 'Replay lesson', onclick: () => setPhase('story') }),
 chapter ? el('a', { class: 'btn', href: `#/chapter/${chapter.id}`, text: 'Chapter overview' }) : null,
-            el('a', { class: 'btn', href: '#/', text: 'Chapters' }),
+            el('a', { class: 'btn', href: '#/', text: 'Home' }),
             next ? el('a', { class: 'btn primary', href: `#/lesson/${next}`, text: 'Next lesson' }) : null
           )
         )
@@ -386,7 +450,7 @@ chapter ? el('a', { class: 'btn', href: `#/chapter/${chapter.id}`, text: 'Chapte
     };
 
     view.append(
-      el('a', { class: 'back', href: chapter ? `#/chapter/${chapter.id}` : '#/', text: chapter ? '← Chapter' : '← Chapters' }),
+      el('a', { class: 'back', href: chapter ? `#/chapter/${chapter.id}` : '#/', text: chapter ? '← Chapter' : '← Home' }),
       el('header', { class: 'lesson-head' }, title),
       ...(cover ? [el('div', { class: 'lesson-hero' }, cover)] : []),
       el(
@@ -413,11 +477,13 @@ chapter ? el('a', { class: 'btn', href: `#/chapter/${chapter.id}`, text: 'Chapte
     const hash = window.location.hash || '#/';
     const lessonMatch = /^#\/lesson\/([\w-]+)$/.exec(hash);
     const chapterMatch = /^#\/chapter\/([\w-]+)$/.exec(hash);
+    const topicMatch = /^#\/topic\/([\w-]+)$/.exec(hash);
 
     if (lessonMatch) renderLesson(lessonMatch[1]);
     else if (chapterMatch) renderChapter(chapterMatch[1]);
+    else if (topicMatch) renderTopic(topicMatch[1]);
     else if (hash === '#/progress') renderProgress();
-    else renderChapters();
+    else renderHome();
     window.scrollTo(0, 0);
   }
 

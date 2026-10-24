@@ -1,6 +1,6 @@
 # Tech Learning
 
-Static, no-build vanilla JS app (global `window.TL`). Open `index.html`; there is no bundler. Lessons live in `content/chapter-N/*.js` and are registered with `TL.registerLesson(...)`; chapters and parts are listed in `content/chapters.js`; every lesson script must also be added to `index.html`.
+Static, no-build vanilla JS app (global `window.TL`). Open `index.html`; there is no bundler. Lessons live in `content/<chapter-id>/*.js` (chapter ids: `computer`, `network`, `ai`, `electricity`, `components`) and are registered with `TL.registerLesson(...)`; topics, chapters and parts are listed in `content/topics.js` (a topic holds chapters, a chapter holds lessons or parts); every lesson script must also be added to `index.html`.
 
 ## Verifying changes
 
@@ -11,8 +11,8 @@ Static, no-build vanilla JS app (global `window.TL`). Open `index.html`; there i
 ## Images: when to generate
 
 - Every lesson needs a cover image at `img/lessons/<lesson-id>.png`, referenced by `cover: 'img/lessons/<lesson-id>.png'` in the lesson object. Without it the lesson intro screen is empty.
-- Generate one whenever you add a new lesson (before reporting the work as done), and whenever `check-content.js` reports `MISSING cover`. Also check lessons added by others: every id in `content/chapters.js` should have a matching file in `img/lessons/`.
-- Chapter covers live in `img/chapters/chN.png` (`cover` on the chapter in `chapters.js`).
+- Generate one whenever you add a new lesson (before reporting the work as done), and whenever `check-content.js` reports `MISSING cover`. Also check lessons added by others: every id in `content/topics.js` should have a matching file in `img/lessons/`.
+- Chapter covers live in `img/chapters/<chapter-id>.png` (`cover` on the chapter in `topics.js`). Topic covers (shown on the home topic selector) live in `img/topics/<topic-id>.png` (`cover` on the topic); a new topic needs one, same command and style.
 - Optional per-step pictures use `looksLike: { title, src, alt, caption }` in a step (one per step; it shows a "see what it looks like" button). Use them for real-world objects a learner can picture: cables, data centres, chips. Photos live in `img/real/<name>.png`, same command as below with `--out img/real/<name>.png` and the prompt `<subject>. Photorealistic documentary-style photograph, natural lighting, sharp detail, no text, no letters, no logos, no watermark.`
 
 ## Images: how to generate

@@ -1,1 +1,5 @@
 .env
+
+# image generation logs
+_gen_*.log
+_tmp_*

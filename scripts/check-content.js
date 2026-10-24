@@ -23,14 +23,14 @@ global.setTimeout = () => 0;
 global.matchMedia = () => ({ matches: false });
 
 const load = (f) => new Function(fs.readFileSync(path.join(root, f), 'utf8')).call(global);
-['js/util.js', 'js/engine/visuals.js', 'js/engine/worldmap-data.js', 'js/engine/worldmap-routes.js', 'js/engine/worldmap.js', 'js/engine/cards.js', 'content/chapters.js'].forEach(load);
+['js/util.js', 'js/engine/visuals.js', 'js/engine/circuits.js', 'js/engine/aiviz.js', 'js/engine/worldmap-data.js', 'js/engine/worldmap-routes.js', 'js/engine/worldmap.js', 'js/engine/cards.js', 'content/topics.js'].forEach(load);
 const TL = global.TL;
 
 // Scene files reference browser-only classes lazily; lesson files only need TL.registerLesson and scene globals.
-const sceneFiles = ['content/chapter-1/computer-scene.js', 'content/chapter-2/home-scene.js', 'content/chapter-2/web-scenes.js', 'content/chapter-3/ai-scenes.js'];
+const sceneFiles = ['content/computer/computer-scene.js', 'content/network/home-scene.js', 'content/network/web-scenes.js', 'content/ai/ai-scenes.js', 'content/components/transistor-scene.js'];
 sceneFiles.forEach((f) => load(f));
 TL.chapters.forEach((c) => {
-  const dir = path.join(root, 'content', c.id.replace('ch', 'chapter-'));
+  const dir = path.join(root, 'content', c.id);
   fs.readdirSync(dir).filter((f) => f.endsWith('.js') && !/scene/.test(f)).forEach((f) => load(path.relative(root, path.join(dir, f))));
 });
 
@@ -38,6 +38,10 @@ let problems = 0;
 let visuals = 0;
 const fail = (m) => { problems++; console.log(m); };
 TL.chapters.forEach((c) => c.lessons.forEach((id) => { if (!TL.lessons[id]) fail(`Chapter ${c.id} lists unknown lesson ${id}`); }));
+TL.topics.forEach((t) => { if (t.cover && !fs.existsSync(path.join(root, t.cover))) fail(`MISSING topic cover ${t.cover}`); });
+TL.chapters.forEach((c) => { if (c.cover && !fs.existsSync(path.join(root, c.cover))) fail(`MISSING chapter cover ${c.cover}`); });
+const listed = new Set(TL.chapters.flatMap((c) => c.lessons));
+Object.keys(TL.lessons).forEach((id) => { if (!listed.has(id)) fail(`Lesson ${id} is not listed in content/topics.js`); });
 Object.values(TL.lessons).forEach((l) => {
   l.steps.forEach((s, i) => {
     try {

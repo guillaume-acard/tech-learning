@@ -10,11 +10,15 @@ Open `index.html` in a browser. That is all.
 
 ## Content
 
-| Chapter | Topic |
-|---|---|
-| 1 | How a computer works: hardware (CPU, memory, transistors) and software (programs, code, machine code) |
-| 2 | How a network and the internet work: home network, URLs, DNS, packets, browsers, security, HTTPS |
-| 3 | How AI works: language models, training, prompts, agents, tools, RAG, image generation |
+Content is grouped as topics, which hold chapters, which hold lessons. The home page is a topic selector (`#/topic/<id>` lists a topic's chapters, `#/chapter/<id>` lists its lessons).
+
+| Topic | Chapter | Covers |
+|---|---|---|
+| Computer systems | How a computer works | hardware (CPU, memory) and software (programs, code, machine code) |
+| Computer systems | How a network and the internet work | home network, URLs, DNS, packets, browsers, security, HTTPS |
+| Computer systems | How AI works | types of AI, genetic algorithms, language models, training, image generation, prompts, agents, tools, RAG |
+| Electronics | Electricity basics | voltage, current, power (volts, amps, watts), circuits, series and parallel |
+| Electronics | Electronic components | LEDs, resistors and Ohm's law, potentiometers, capacitors, transistors, infrared distance sensors, DC motors, servos, microcontrollers |
 
 The full product plan is in [SPECS.md](SPECS.md).
 
@@ -28,9 +32,9 @@ js/engine/          scene player, step cards, visuals, code lab, world map
 js/labs/            interactive labs (DNS, RSA, URL, next-word, ...)
 js/quiz/            quiz system
 js/progress.js      progress and stars (localStorage)
-content/chapters.js chapter and part list
-content/chapter-N/  one script per lesson
-img/                chapter covers, lesson covers, real-world photos
+content/topics.js   topics, chapters and part list
+content/<chapter>/  one script per lesson (computer, network, ai, electricity, components)
+img/                topic covers, chapter covers, lesson covers, real-world photos
 scripts/            Node helper scripts (content check, image generation)
 ```
 
@@ -38,8 +42,8 @@ Everything hangs off a single global, `window.TL`.
 
 ## Adding a lesson
 
-1. Create `content/chapter-N/<name>.js` and register it with `TL.registerLesson({ id, title, cover, steps, ... })`.
-2. Add the lesson id to its chapter in `content/chapters.js`.
+1. Create `content/<chapter-id>/<name>.js` and register it with `TL.registerLesson({ id, title, cover, steps, ... })`.
+2. Add the lesson id to its chapter in `content/topics.js` (lesson ids look like `<chapter-id>-<name>`).
 3. Add a `<script>` tag for the file in `index.html`.
 4. Add a cover image at `img/lessons/<lesson-id>.png` (see below).
 

@@ -28,6 +28,8 @@ window.TL = window.TL || {};
 //            | 'mosfet' (cross-section of the gate) | 'nand' | 'nor' (cases:[{ a:0|1, b:0|1, caption }]),
 //            cases:[{ on:false, caption }, { on:true, caption }]. Electrical schematics drawn with the standard symbols;
 //            on = switch closed / gate high, and current flows along the wires (animated).
+//            Electronics diagrams (js/engine/circuits.js): 'water' (level, pipe: 0..1), 'cells' (n: 1-3), 'short' (on),
+//            'led' (state: 'on'|'reversed'|'noresistor', volts), 'bulbs' (mode: 'series'|'parallel', out, volts), 'photo' (light: 0-2), 'ir' (dist in cm, dark); symbols also has 'led', 'photodiode', 'diode', 'capacitor', 'pot' and 'motor'.
 //  worldmap  groups:['atlantic','pacific','eurasia','africa','asia'] (also 'telegraph','tat8'), focus:'pacific', labels:true
 //            Simplified world map with submarine cable routes (data in js/engine/worldmap-*.js).
 (function (TL) {
@@ -460,6 +462,8 @@ window.TL = window.TL || {};
     ground: ['Ground (0 V)', 'where the current returns to'],
     nmos: ['Transistor', 'a switch worked by the gate'],
   };
+  // Shared with js/engine/circuits.js, which adds more symbols and diagrams.
+  TL.circuit = { SYM, DRAW, CASE_ON, LEGEND, S, W, T, G, dot, part };
 
   function drawSymbols(row) {
     const keys = row.items || ['battery', 'switch', 'lamp', 'resistor', 'ground'];

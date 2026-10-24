@@ -49,15 +49,15 @@ async function genOne({ outPath, prompt, size = '2048x1152' }) {
     'wide banner composition with space for UI overlay',
   ].join(', ');
 
-  // Lesson cover images (Chapter 2)
+  // Lesson cover images (network chapter)
   await genOne({
-    outPath: 'img/lessons/ch2-https.png',
+    outPath: 'img/lessons/network-https.png',
     prompt:
       `Lesson cover image. Theme: HTTPS and secure web browsing. Show a glowing encrypted tunnel between a laptop/browser and a web server, with a padlock symbol integrated into the tunnel. ${style}.`,
   });
 
   await genOne({
-    outPath: 'img/lessons/ch2-capstone.png',
+    outPath: 'img/lessons/network-capstone.png',
     prompt:
       `Lesson cover image. Theme: network recap / mission complete. Show a home router connected to devices (laptop, phone, TV) and to the internet cloud/globe, with multiple small packet dots traveling and a subtle checkmark-like completion symbol. ${style}.`,
   });

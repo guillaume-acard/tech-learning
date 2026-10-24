@@ -85,6 +85,8 @@ Scoring: 3 stars per quiz based on first-try correctness (all right = 3, one or 
 
 ## 6. Content plan
 
+Structure: topics hold chapters, chapters hold lessons. The home page is a topic selector with a cover image per topic; choosing a topic shows its chapters. Chapter numbers are no longer used; the original "Chapter 1/2/3" below are now the chapters `computer`, `network` and `ai` under the topic Computer systems (lesson ids `computer-*`, `network-*`, `ai-*`). A second topic, Electronics, has the chapters `electricity` (voltage, current, power) and `components` (circuits, LEDs, resistors, series and parallel, transistors), with interactive circuit diagrams and the `electric` lab.
+
 Build order: **Chapter 2 first**, then Chapter 1, then Chapter 3. Chapter 2 is the most personal and motivating, and it forces the diagram engine to get built well.
 
 ### 6.1 Chapter 1: How a computer works (v2)
@@ -189,7 +191,7 @@ For each lesson, watch (do not help) and note:
 
 - **Stack**: plain HTML, CSS and JavaScript, SVG for diagrams and CSS/JS animation, `<canvas>` only for particle effects. No build step; static files that can be opened by double-click or hosted on any static host (e.g. GitHub Pages).
 - **Classic scripts, not ES modules**: browsers block ES modules and `fetch` on `file://` pages, so all code is loaded with plain `<script>` tags in `index.html` and shares one `window.TL` namespace. Content is `.js` files that call `TL.registerLesson({...})`, not JSON.
-- **Data-driven content**: lessons, scenes, captions and quiz questions live in data files. The engine renders them. Adding a lesson means adding a content file and one `<script>` line plus an entry in `content/chapters.js`, not new engine code.
+- **Data-driven content**: lessons, scenes, captions and quiz questions live in data files. The engine renders them. Adding a lesson means adding a content file and one `<script>` line plus an entry in `content/topics.js`, not new engine code.
 - **Structure (as built in M0)**:
   - `index.html`: loads everything; the app is a single page using `#/lesson/<id>` routes
   - `css/style.css`: all styles and the link-type colours
@@ -197,7 +199,7 @@ For each lesson, watch (do not help) and note:
   - `js/engine/`: `icons.js` (device icons and link types), `scene.js` (SVG scene, packets, pathfinding, connectivity), `player.js` (story steps), `sandbox.js` (break-it mode)
   - `js/quiz/quiz.js`: multiple choice, match (drag and drop) and order questions
   - `js/app.js`: home page, lesson flow, recap
-  - `content/chapters.js` and `content/chapter-N/*.js`: chapter list and lesson data
+  - `content/topics.js` and `content/<chapter-id>/*.js`: topic and chapter list, lesson data
 - **Visual consistency**: one palette and one icon set for the whole site; one colour/line style per link type (fibre, LAN cable, Wi-Fi, HDMI, 4G) used in every scene.
 - **Accessibility and comfort**: keyboard operable, readable contrast, captions for every animation step, respects `prefers-reduced-motion` (steps shown statically), works on tablets and phones.
 - **No external dependencies** in v1 (or at most a tiny drag-and-drop helper if hand-rolling proves painful).

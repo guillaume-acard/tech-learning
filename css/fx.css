@@ -253,3 +253,13 @@ a { text-shadow: 0 0 6px rgba(var(--fx-cyan), 0.35); }
   .goal.done, #app > * { animation: none !important; }
   .btn::after { display: none; }
 }
+
+/* ---------- Drifting particles (canvas drawn by js/fx.js) ---------- */
+#fx-particles {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}

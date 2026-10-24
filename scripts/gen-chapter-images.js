@@ -48,17 +48,17 @@ async function genOne({ outPath, prompt, size = '1536x1024' }) {
   ].join(', ');
 
   await genOne({
-    outPath: `${base}/ch1.png`,
+    outPath: `${base}/computer.png`,
     prompt: `Chapter cover image. Theme: how a computer works. Show a stylized computer: CPU, RAM, disk and screen connected with glowing lines, simple icons. ${commonStyle}.`,
   });
 
   await genOne({
-    outPath: `${base}/ch2.png`,
+    outPath: `${base}/network.png`,
     prompt: `Chapter cover image. Theme: networks and the internet. Show a home router in the center connected to devices (laptop, phone, TV) and then to a globe/cloud, with packet dots traveling. ${commonStyle}.`,
   });
 
   await genOne({
-    outPath: `${base}/ch3.png`,
+    outPath: `${base}/ai.png`,
     prompt: `Chapter cover image. Theme: AI and language models. Show a stylized neural network / brain made of nodes and links, plus an abstract language token stream (blocks) with probability bars. ${commonStyle}.`,
   });
 })();
