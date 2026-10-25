@@ -50,7 +50,10 @@ window.TL = window.TL || {};
         pts.push(`${f1(x)},${f1(mid - a * Math.sin(phase))}`);
       }
       kids.push(S('line', { class: 'pv-axis', x1: X0, y1: mid, x2: X1, y2: mid }));
-      if (w.label) kids.push(S('text', { class: 'pv-label ' + tone(w.tone), x: X0, y: mid - amp - 14, text: w.label }));
+      const annotated = row.annotate && i === 0 && !bits;
+      if (w.label) {
+        kids.push(S('text', { class: 'pv-label ' + tone(w.tone), x: annotated ? X1 : X0, y: mid - amp - 14, 'text-anchor': annotated ? 'end' : null, text: w.label }));
+      }
       if (bits) {
         [...bits].forEach((b, k) => {
           const cx = X0 + seg * k + seg / 2;

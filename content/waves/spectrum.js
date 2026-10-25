@@ -153,6 +153,12 @@ TL.registerLesson({
     },
   ],
 
+  sandbox: {
+    type: 'wave',
+    intro: 'Drag the three sliders and watch the wave. Then pick what carries the message and flip the bits.',
+    goalText: 'Change the frequency, the height and the degree one at a time. Then send the same message by height (AM), by frequency (FM) and by degree (PM).',
+  },
+
   quiz: [
     {
       type: 'choice',

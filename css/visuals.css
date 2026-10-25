@@ -239,6 +239,7 @@
 .pv-axis { stroke: var(--line); stroke-width: 1; stroke-dasharray: 3 4; }
 .pv-wave { fill: none; stroke: var(--tone); stroke-width: 2.4; stroke-linejoin: round; filter: drop-shadow(0 0 3px var(--tone)); }
 .pv-label { fill: var(--tone); font-family: var(--mono); font-size: 13px; font-weight: 700; }
+.wv-ref { fill: none; stroke: var(--muted); stroke-width: 1.6; stroke-dasharray: 5 5; opacity: 0.7; }
 .pv-bit { fill: var(--amber); font-family: var(--mono); font-size: 15px; font-weight: 700; }
 .pv-sep { stroke: var(--line); stroke-width: 1; stroke-dasharray: 2 3; }
 .pv-dim { stroke: var(--amber); stroke-width: 1.4; }
