@@ -7,26 +7,40 @@ TL.registerLesson({
   steps: [
     {
       caption:
-        'A computer is made of two kinds of things. Hardware is everything you can touch: the screen, the keyboard, the chips inside, the cables. If you could drop it on your foot, it is hardware.',
+        'A computer is made of two kinds of things. Hardware is physical: the screen, the keyboard, the chips inside, the cables. If you could drop it on your foot, it is hardware. Software is virtual: a game, a web browser, your photos, the operating system. You cannot touch it, and you cannot drop it on your foot.',
       cards: [
-        [
-          { t: 'Screen', sub: 'you can touch it', tone: 'green' },
-          { t: 'Keyboard', sub: 'you can touch it', tone: 'green' },
-          { t: 'CPU chip', sub: 'you can touch it', tone: 'green' },
-          { t: 'Cable', sub: 'you can touch it', tone: 'green' },
-        ],
+        {
+          kind: 'viz',
+          viz: 'split',
+          left: {
+            title: 'Physical',
+            sub: 'hardware: you can touch it',
+            tone: 'green',
+            items: [
+              { t: 'Screen', icon: 'screen' },
+              { t: 'Keyboard', icon: 'keyboard' },
+              { t: 'CPU chip', icon: 'cpu' },
+              { t: 'Cable', icon: 'cable' },
+            ],
+          },
+          right: {
+            title: 'Virtual',
+            sub: 'software: you cannot touch it',
+            tone: 'violet',
+            items: [
+              { t: 'A game', sub: 'instructions', icon: 'gamepad' },
+              { t: 'A browser', sub: 'instructions', icon: 'browser' },
+              { t: 'Your photos', sub: 'information', icon: 'photo' },
+              { t: 'Operating system', sub: 'instructions', icon: 'gear' },
+            ],
+          },
+        },
       ],
     },
     {
       caption:
-        'Software is the instructions that tell the hardware what to do: a game, a web browser, a music player, the operating system. You cannot touch it. It is information, stored as 0s and 1s.',
+        'So what is software made of? Nothing you can touch: it is information, stored as 0s and 1s. The instructions in a program and the data in a photo are both just lists of bytes.',
       cards: [
-        [
-          { t: 'A game', sub: 'instructions', tone: 'violet' },
-          { t: 'A browser', sub: 'instructions', tone: 'violet' },
-          { t: 'Your photos', sub: 'information', tone: 'violet' },
-          { t: 'The operating system', sub: 'instructions', tone: 'violet' },
-        ],
         {
           kind: 'viz',
           viz: 'bits',
@@ -60,11 +74,16 @@ TL.registerLesson({
       caption:
         'That is why one computer can do thousands of different jobs. The hardware does not change. Install a different program and the same chips now edit video, play a game or run a chat. Without software, the hardware has nothing to do.',
       cards: [
-        [
-          { t: 'Same hardware', sub: 'nothing changes', tone: 'green' },
-          { op: '+' },
-          { t: 'Different software', sub: 'new job each time', tone: 'violet' },
-        ],
+        {
+          kind: 'viz',
+          viz: 'computer',
+          machines: [
+            { screen: 'game', t: 'A game', sub: 'software' },
+            { screen: 'browser', t: 'A browser', sub: 'software' },
+          ],
+          arrow: '▲ both run on',
+          hardware: { t: 'The same hardware', sub: 'nothing changes' },
+        },
       ],
     },
     {
@@ -96,10 +115,10 @@ TL.registerLesson({
         'Firmware is software that lives inside the hardware itself. It is a small program stored in a chip on the device, so it is there even when the power is off. Its job is basic: wake the device up and control its parts. Almost every electronic thing has some.',
       cards: [
         [
-          { t: 'Computer', sub: 'startup program on the motherboard', tone: 'amber' },
-          { t: 'Router', sub: 'the program that routes packets', tone: 'amber' },
-          { t: 'TV remote', sub: 'reads buttons, sends signals', tone: 'amber' },
-          { t: 'Washing machine', sub: 'runs the wash cycles', tone: 'amber' },
+          { t: 'Computer', sub: 'startup program on the motherboard', tone: 'amber', icon: 'desktop' },
+          { t: 'Router', sub: 'the program that routes packets', tone: 'amber', icon: 'router' },
+          { t: 'TV remote', sub: 'reads buttons, sends signals', tone: 'amber', icon: 'remote' },
+          { t: 'Washing machine', sub: 'runs the wash cycles', tone: 'amber', icon: 'washer' },
         ],
       ],
       realLife:

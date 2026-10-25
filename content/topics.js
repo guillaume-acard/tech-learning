@@ -80,6 +80,28 @@ TL.topics = [
       },
     ],
   },
+  {
+    id: 'physics',
+    title: 'Physics',
+    cover: 'img/topics/physics.png',
+    blurb: 'The waves and fields behind wireless signals, light and electric motors.',
+    chapters: [
+      {
+        id: 'waves',
+        title: 'Waves and wireless',
+        cover: 'img/chapters/waves.png',
+        blurb: 'What a wave is, the invisible electromagnetic spectrum, how wi-fi carries data through the air, and how it differs from Bluetooth.',
+        lessons: ['waves-spectrum', 'waves-wifi', 'waves-bluetooth'],
+      },
+      {
+        id: 'magnetism',
+        title: 'Magnetism',
+        cover: 'img/chapters/magnetism.png',
+        blurb: 'Magnetic fields, and how electric current turns a coil of wire into a switchable magnet.',
+        lessons: ['magnetism-electromagnet'],
+      },
+    ],
+  },
 ];
 
 TL.chapters = TL.topics.flatMap((t) => t.chapters.map((ch) => Object.assign(ch, { topic: t })));

@@ -19,6 +19,8 @@ Content is grouped as topics, which hold chapters, which hold lessons. The home 
 | Computer systems | How AI works | types of AI, genetic algorithms, language models, training, image generation, prompts, agents, tools, RAG |
 | Electronics | Electricity basics | voltage, current, power (volts, amps, watts), circuits, series and parallel |
 | Electronics | Electronic components | LEDs, resistors and Ohm's law, potentiometers, capacitors, transistors, infrared distance sensors, DC motors, servos, microcontrollers |
+| Physics | Waves and wireless | waves and the electromagnetic spectrum, how wi-fi carries data, wi-fi vs Bluetooth (with two labs) |
+| Physics | Magnetism | magnetic fields and electromagnets |
 
 The full product plan is in [SPECS.md](SPECS.md).
 

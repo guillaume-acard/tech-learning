@@ -2,6 +2,11 @@
 TL.homeScene = {
   label: 'A home network: router, computers, TVs, consoles, phones and a watch, linked to the internet and a mobile tower',
   viewBox: [0, 0, 1100, 700],
+  fitTop: true,
+  background: [
+    { kind: 'rect', x: 20, y: 140, width: 840, height: 550, rx: 26, fill: 'rgba(57, 255, 136, 0.05)', stroke: 'rgba(57, 255, 136, 0.45)', strokeWidth: 2.5, dash: '12 8', label: 'YOUR HOME' },
+    { kind: 'label', x: 890, y: 300, text: 'OUTSIDE' },
+  ],
   nodes: {
     tower: { x: 900, y: 70, icon: 'tower', label: '4G tower', sub: 'Mobile network' },
     voice: { x: 1020, y: 170, icon: 'phone', label: 'Phone call service', sub: 'Mobile operator' },

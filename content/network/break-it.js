@@ -89,9 +89,9 @@ TL.registerLesson({
       },
       {
         label: 'Calls but no internet',
-        intro: 'Nothing can reach the internet anymore, but you can still make phone calls. Which links are cut?',
+        intro: 'Nothing can reach the internet anymore, but you can still make phone calls. Remember: the home has two roads to the internet (the router fibre and the mobile network), and phone calls use their own link to the tower. Which links are cut?',
         goal: {
-          text: 'Cut links so that all devices lose internet access, but you can still make phone calls.',
+          text: 'Cut the links so that every device loses internet access (including the phones and the watch on 4G), but the phone call link stays working.',
           check: ({ offline, broken }) =>
             ['laptop', 'desktop', 'phone1', 'phone2', 'watch', 'tv', 'tvbox', 'switch'].every((id) => offline.has(id)) &&
             !broken.has('tower-voice') &&

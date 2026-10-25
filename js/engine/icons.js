@@ -147,7 +147,25 @@ window.TL = window.TL || {};
       line({ d: 'M-11.3 6.7 A16 16 0 0 1 11.3 6.7' }),
       dot(0, 20, 3),
     ],
+    remote: () => [rect(-11, -26, 22, 52, 6), s('circle', { class: 'ic', cx: 0, cy: -14, r: 4 }), dot(-5, -2, 2), dot(5, -2, 2), dot(-5, 7, 2), dot(5, 7, 2), line({ d: 'M-5 17 H5' })],
+    washer: () => [rect(-22, -26, 44, 52, 4), line({ d: 'M-22 -14 H22' }), dot(-14, -20, 1.8), dot(-7, -20, 1.8), s('circle', { class: 'ic', cx: 0, cy: 4, r: 13 }), line({ d: 'M-8 4 Q-4 0 0 4 Q4 8 8 4' })],
+    gamepad: () => [line({ d: 'M-20 -10 H20 Q30 -10 28 8 Q26 20 18 18 Q12 16 10 10 H-10 Q-12 16 -18 18 Q-26 20 -28 8 Q-30 -10 -20 -10 Z' }), line({ d: 'M-18 -2 V6 M-22 2 H-14' }), dot(14, -1, 2.2), dot(20, 5, 2.2)],
+    browser: () => [rect(-28, -22, 56, 44, 4), line({ d: 'M-28 -10 H28' }), rect(-20, -18, 30, 5, 2.5), dot(18, -15.5, 1.8), line({ d: 'M-20 0 H20 M-20 8 H8' })],
+    photo: () => [rect(-26, -20, 52, 40, 3), s('circle', { class: 'ic', cx: -12, cy: -7, r: 4 }), line({ d: 'M-26 14 L-8 -2 L4 10 L12 2 L26 14' })],
+    gear: () => [
+      s('circle', { class: 'ic', cx: 0, cy: 0, r: 11 }),
+      s('circle', { class: 'ic', cx: 0, cy: 0, r: 20 }),
+      line({ d: 'M0 -20 V-27 M0 20 V27 M-20 0 H-27 M20 0 H27 M-14 -14 L-19 -19 M14 -14 L19 -19 M-14 14 L-19 19 M14 14 L19 19' }),
+    ],
+    cable: () => [line({ d: 'M-26 12 H-12 Q0 12 0 0 Q0 -12 12 -12 H26' }), rect(-30, 6, 8, 12, 2), rect(22, -18, 8, 12, 2)],
     generic: () => [rect(-22, -22, 44, 44, 6)],
+  };
+
+  // A small inline <svg> of a named icon, coloured by the surrounding text colour (see .tl-icon in css/visuals.css).
+  TL.iconSvg = (name, size) => {
+    const draw = TL.icons[name];
+    if (!draw) throw new Error('Unknown icon "' + name + '"');
+    return s('svg', { class: 'tl-icon', viewBox: '-32 -32 64 64', width: size || 40, height: size || 40, 'aria-hidden': 'true' }, draw());
   };
 
   // One colour/line style per kind of link, reused in every scene.

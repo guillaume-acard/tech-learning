@@ -372,7 +372,7 @@ window.TL = window.TL || {};
 
   // Rows of big labelled tiles for lessons about text and numbers (URLs, primes, keys).
   // A row can be:
-  // - An array of items: { t, sub, tone } for a tile or { op } for a symbol between tiles.
+  // - An array of items: { t, sub, tone, icon? } for a tile (icon = a name from TL.icons) or { op } for a symbol between tiles.
   // - A visualization object: { kind:'viz', viz:'vectors3d', ... } or { kind:'blocks', items:[...] }
   TL.renderCards = function (container, cards) {
     TL.clear(container);
@@ -400,7 +400,8 @@ window.TL = window.TL || {};
               ? el('div', { class: 'cx-op', text: it.op })
               : el(
                   'div',
-                  { class: `cx tone-${it.tone || 'cyan'}` },
+                  { class: `cx tone-${it.tone || 'cyan'}` + (it.icon ? ' has-icon' : '') },
+                  it.icon ? TL.iconSvg(it.icon, 44) : null,
                   el('div', { class: 'cx-t', text: it.t }),
                   it.sub ? el('div', { class: 'cx-sub', text: it.sub }) : null
                 )

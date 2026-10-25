@@ -8,7 +8,72 @@ TL.registerLesson({
   steps: [
     {
       caption:
-        'First, what is an IP address? Think of the address on an envelope. Every message sent over the internet is like a letter: to arrive, it needs a "To" address, and to get an answer back it needs a "From" address. An IP address is that address: a number given to every device that is connected to a network.',
+        'An IP address works like the address on a letter. A postal letter has the address of the house, but also the name of the person it is for: the postman only needs the house address, and inside the house the letter is handed to the right person. On a network it is similar, with a twist: the outside world only knows the house address (the public IP address, shared by the whole house). The name of each device (its local, or private, IP address) is only used inside the house.',
+      show: {
+        nodes: ['laptop', 'router', 'internet'],
+        links: ['laptop-router', 'router-internet'],
+      },
+      labels: { router: '203.0.113.42', laptop: '192.168.1.11' },
+      highlight: ['router', 'laptop'],
+      cards: [
+        {
+          kind: 'viz',
+          viz: 'record',
+          title: 'A postal letter',
+          groups: [
+            { label: 'The house', tone: 'cyan', fields: [{ k: 'Address', v: '12 Maple Street' }] },
+            { label: 'The person inside', tone: 'amber', fields: [{ k: 'Name', v: 'Anna' }] },
+          ],
+        },
+        {
+          kind: 'viz',
+          viz: 'table',
+          title: 'The same idea on the network',
+          columns: ['', 'Postal letter', 'Network message'],
+          rows: [
+            ['The house', '12 Maple Street', '203.0.113.42 (public IP address)'],
+            ['Who uses the house address', 'The postman, to find the house', 'The whole internet, to find your house'],
+            ['The person inside', 'Anna', '192.168.1.11 (local IP address)'],
+            ['Who uses the name', 'Only people inside the house, to hand over the letter', 'Only the devices inside the house. The internet never sees it.'],
+          ],
+          tone: 'cyan',
+        },
+      ],
+      packets: [{ path: ['internet', 'router', 'laptop'], color: '#39ff88', label: 'letter' }],
+      realLife:
+        'The router is the front door that receives everything for the house. Because the internet only knows the house address, the router has to work out which device inside each message is for. The next steps show how.',
+    },
+    {
+      caption:
+        'Both kinds of address are four numbers separated by dots, like 192.168.1.11. Each number goes from 0 to 255. Take a private address from inside the house: the first three numbers say which home network it is, and the last number says which device on that network. Only devices inside the house see this address.',
+      show: {},
+      labels: { laptop: '192.168.1.11' },
+      highlight: ['laptop'],
+      cards: [
+        {
+          kind: 'viz',
+          viz: 'record',
+          title: 'Reading a private address: four numbers',
+          groups: [
+            { label: 'Which network (the home network)', tone: 'cyan', fields: [{ k: 'number 1', v: '192' }, { k: 'number 2', v: '168' }, { k: 'number 3', v: '1' }] },
+            { label: 'Which device on it', tone: 'amber', fields: [{ k: 'number 4', v: '11' }] },
+          ],
+          note: 'Here: network 192.168.1, device number 11, the laptop. This is the laptop\'s local address, not the house address the internet sees.',
+        },
+        {
+          kind: 'viz',
+          viz: 'bits',
+          title: 'Why only up to 255? Each number is 8 bits',
+          rows: [{ bits: '11000000', label: '192', equals: '192', weights: true, group: 4, tone: 'cyan' }],
+          note: '8 bits can make 256 different values, from 0 to 255. Four numbers of 8 bits make 32 bits in total.',
+        },
+      ],
+      realLife:
+        'The real split between "network" and "device" can fall in a different place, but the idea is the same: part of the address names the network, part names the device. The public address, like 203.0.113.42, also has four numbers, but it names the house on the internet and belongs to the whole house.',
+    },
+    {
+      caption:
+        'Every message sent over the internet is like a letter: to arrive, it needs a "To" address, and to get an answer back it needs a "From" address. Both are IP addresses, given to every device that is connected to a network.',
       show: {
         nodes: ['laptop', 'router', 'internet'],
         links: ['laptop-router', 'router-internet'],
@@ -22,7 +87,7 @@ TL.registerLesson({
     },
     {
       caption:
-        'Inside the house, the router gives every device its own private address, like a room number. They look like 192.168.1.12.',
+        'Inside the house, the router gives every device its own private address, like the name of each person living there. They look like 192.168.1.12.',
       show: {
         nodes: ['router', 'internet', 'desktop', 'laptop', 'tv', 'phone1'],
         links: ['router-internet', 'desktop-router', 'laptop-router', 'tv-router', 'phone1-router'],
@@ -38,16 +103,6 @@ TL.registerLesson({
       cards: [
         {
           kind: 'viz',
-          viz: 'record',
-          title: 'Reading one address: four numbers',
-          groups: [
-            { label: 'The street (this home network)', tone: 'cyan', fields: [{ k: 'number 1', v: '192' }, { k: 'number 2', v: '168' }, { k: 'number 3', v: '1' }] },
-            { label: 'The room (this device)', tone: 'amber', fields: [{ k: 'number 4', v: '11' }] },
-          ],
-          note: 'Each number goes from 0 to 255. Here: network 192.168.1, device number 11, the laptop.',
-        },
-        {
-          kind: 'viz',
           viz: 'table',
           title: 'Private addresses handed out by the router',
           columns: ['Device', 'Private address'],
@@ -61,12 +116,10 @@ TL.registerLesson({
           tone: 'cyan',
         },
       ],
-      realLife:
-        'Splitting the number into "street" and "room" is how most home networks work. The real split can be in a different place, but the idea is the same: part of the address names the network, part names the device.',
     },
     {
       caption:
-        'The internet does not know your room numbers. The whole house shows up under a single public address given by your internet provider, like a building that has one street address for all its flats.',
+        'The internet does not know your private names. The whole house shows up under a single public address given by your internet provider, like a building that has one street address for all the people living in it.',
       show: {},
       labels: { router: '203.0.113.42', internet: 'via your provider' },
       highlight: ['router'],
@@ -77,9 +130,9 @@ TL.registerLesson({
           title: 'Two kinds of address',
           columns: ['Address', 'Who can see it', 'Belongs to'],
           rows: [
-            ['192.168.1.11', 'only inside the house', 'the laptop (room number)'],
-            ['192.168.1.12', 'only inside the house', 'the Smart TV (room number)'],
-            ['203.0.113.42', 'the whole internet', 'the router, for the whole house (street address)'],
+            ['192.168.1.11', 'only inside the house', 'the laptop (the person inside)'],
+            ['192.168.1.12', 'only inside the house', 'the Smart TV (the person inside)'],
+            ['203.0.113.42', 'the whole internet', 'the router, for the whole house (the house address)'],
           ],
           highlight: 2,
           tone: 'amber',
@@ -194,7 +247,7 @@ TL.registerLesson({
     },
     {
       caption:
-        'But the internet cannot reply to 192.168.1.11: that room number only exists inside the house. So the router acts like a receptionist. When the laptop asks for a website, the router writes it in a second list, the connection table, and sends the request out under the house address.',
+        'But the internet cannot reply to 192.168.1.11: that private name only exists inside the house. So the router acts like a receptionist. When the laptop asks for a website, the router writes it in a second list, the connection table, and sends the request out under the house address.',
       show: {},
       labels: { router: 'remembers who asked', laptop: '192.168.1.11' },
       highlight: ['router', 'laptop'],
@@ -284,7 +337,7 @@ TL.registerLesson({
       q: 'Which of these is a private address that only works inside a home?',
       options: ['192.168.1.12', '203.0.113.42', 'www.example.com', 'https://example.com'],
       answer: 0,
-      why: 'Addresses starting with 192.168 are private room numbers, handed out by your router.',
+      why: 'Addresses starting with 192.168 are private addresses, like the name of a person inside the house, handed out by your router.',
     },
     {
       type: 'choice',
@@ -345,8 +398,8 @@ TL.registerLesson({
   ],
 
   recap: [
-    'Each device at home has a private address (a room number) given by the router.',
-    'The whole house shares one public address (the street address) seen by the internet.',
+    'Each device at home has a private address (like the name of a person inside the house) given by the router.',
+    'The whole house shares one public address (the house address) seen by the internet.',
     'The router reads the destination address on each packet, finds the matching row in its routing table and sends the packet out that way. If nothing matches, the default route sends it to the internet.',
     'The router remembers who asked (NAT, using a connection table) so every answer reaches the right device.',
   ],

@@ -33,6 +33,10 @@ window.TL = window.TL || {};
       this.svg.append(this.layerBack, this.layerLinks, this.layerNodes, this.layerPackets);
 
       (def.background || []).forEach((b) => {
+        if (b && b.kind === 'label') {
+          this.layerBack.append(s('text', { class: 'scene-bg-label', x: b.x, y: b.y, text: b.text }));
+          return;
+        }
         if (!b || b.kind !== 'rect') return;
         this.layerBack.append(
           s('rect', {
@@ -45,6 +49,7 @@ window.TL = window.TL || {};
             fill: b.fill || 'rgba(10, 24, 44, 0.5)',
             stroke: b.stroke || 'rgba(56, 232, 255, 0.25)',
             'stroke-width': b.strokeWidth || 2,
+            'stroke-dasharray': b.dash || null,
           })
         );
         if (b.label) {
@@ -190,6 +195,22 @@ window.TL = window.TL || {};
       this.visibleLinks = new Set(links);
       Object.values(this.nodes).forEach((n) => n.el.classList.toggle('hidden', !this.visibleNodes.has(n.id)));
       Object.values(this.links).forEach((l) => l.el.classList.toggle('hidden', !this.visibleLinks.has(l.id)));
+      this.fitTop();
+    }
+
+    // With def.fitTop, trim the empty band above the highest visible node or background box.
+    fitTop() {
+      if (!this.def.fitTop) return;
+      const [x, y, w, h] = this.def.viewBox;
+      let top = Infinity;
+      (this.def.background || []).forEach((b) => {
+        if (b && b.kind === 'rect') top = Math.min(top, b.y - 8);
+      });
+      this.visibleNodes.forEach((id) => {
+        top = Math.min(top, this.def.nodes[id].y - NODE_H / 2 - 50);
+      });
+      const cut = Number.isFinite(top) ? Math.max(0, Math.min(top - y, h / 2)) : 0;
+      this.svg.setAttribute('viewBox', `${x} ${y + cut} ${w} ${h - cut}`);
     }
 
     showAll() {

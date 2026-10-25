@@ -17,6 +17,27 @@ TL.registerLesson({
       },
       show: { nodes: ['cpu'] },
       highlight: ['cpu'],
+      cards: [
+        {
+          kind: 'viz',
+          viz: 'table',
+          title: 'CPU: what goes in, what comes out',
+          columns: ['It takes in', 'It does', 'It gives out'],
+          rows: [['Instructions and data (from RAM)', 'Calculates (add, compare) and decides what to do next', 'Results (back to RAM or to other parts)']],
+        },
+        {
+          kind: 'viz',
+          viz: 'table',
+          title: 'The clock sets the speed',
+          columns: ['Computer', 'Clock ticks every second'],
+          rows: [
+            ['A 1990s PC', 'about 100 million (100 MHz)'],
+            ['A computer today', 'about 3 to 5 billion (3 to 5 GHz)'],
+          ],
+          cells: [[1, 1]],
+          note: 'The CPU has a clock, like a metronome. On each tick it does one small step. More ticks per second means more steps per second. Modern CPUs also have several cores, which work side by side.',
+        },
+      ],
       realLife: 'The dark panel behind the parts is the motherboard: the big circuit board that every part plugs into, and that carries the signals between them.',
     },
     {
@@ -33,6 +54,19 @@ TL.registerLesson({
       packets: [
         { path: ['cpu', 'ram'], color: '#ffa31a', label: 'save' },
         { path: ['ram', 'cpu'], color: '#39ff88', label: 'read' },
+      ],
+      cards: [
+        {
+          kind: 'viz',
+          viz: 'table',
+          title: 'RAM can do two things',
+          columns: ['Operation', 'What happens'],
+          rows: [
+            ['write(address, value)', 'Puts the value in the numbered box at that address'],
+            ['read(address)', 'Gives back whatever is in the box at that address'],
+          ],
+          note: 'Every box has a number, its address. RAM takes about the same time to reach any box, which is why it is called random access memory.',
+        },
       ],
       realLife: 'RAM forgets everything when the power goes off. That is why unsaved work disappears in a power cut.',
     },
@@ -53,15 +87,39 @@ TL.registerLesson({
           kind: 'viz',
           viz: 'table',
           title: 'RAM and disk side by side',
-          columns: ['', 'RAM (the desk)', 'Disk (the bookshelf)'],
+          columns: ['', 'RAM (the desk)', 'SSD (the bookshelf)', 'Hard drive (a slower bookshelf)'],
           rows: [
-            ['Speed', 'Very fast', 'Slower'],
-            ['Size', 'Smaller (often 8 to 32 GB)', 'Bigger (often 256 GB to 2 TB)'],
-            ['Power off', 'Forgets everything', 'Keeps everything'],
-            ['Used for', 'What you are doing now', 'Files, apps, photos'],
+            ['Wait before data starts to arrive', 'about 0.0001 ms (100 ns)', 'about 0.1 ms', 'about 10 ms'],
+            ['Data per second once it flows', 'about 20 to 50 GB', 'about 0.5 to 7 GB', 'about 0.15 GB'],
+            ['Size', 'Smaller (often 8 to 32 GB)', 'Bigger (often 256 GB to 2 TB)', 'Biggest (often 1 to 20 TB)'],
+            ['Power off', 'Forgets everything', 'Keeps everything', 'Keeps everything'],
+            ['Used for', 'What you are doing now', 'Files, apps, photos', 'Cheap bulk storage, backups'],
           ],
-          cells: [[2, 1], [2, 2]],
-          note: 'The sizes are typical for a home computer. They change from machine to machine.',
+          cells: [[0, 1], [0, 2], [0, 3]],
+          note: 'Typical figures for a home computer. They change from machine to machine. 1 ms is a thousandth of a second, 1 ns a billionth.',
+        },
+        {
+          kind: 'viz',
+          viz: 'bars',
+          title: 'Imagine RAM takes 1 second to answer',
+          items: [
+            { label: 'RAM', value: 1, text: '1 second', tone: 'green' },
+            { label: 'SSD', value: 1000, text: 'about 17 minutes', tone: 'amber' },
+            { label: 'Hard drive', value: 100000, text: 'about 28 hours', tone: 'red' },
+          ],
+          max: 100000,
+          note: 'The same waits, scaled up so you can feel them. This is why the CPU keeps what it is using in RAM instead of fetching it from the disk each time.',
+        },
+        {
+          kind: 'viz',
+          viz: 'table',
+          title: 'Disk: what goes in, what comes out',
+          columns: ['Operation', 'What happens'],
+          rows: [
+            ['save(file name, data)', 'Writes the data to the disk under that name'],
+            ['open(file name)', 'Finds the file and sends its data to RAM and the CPU'],
+          ],
+          note: 'Unlike RAM, the disk works with whole files, found by name, and it moves data in larger chunks.',
         },
       ],
       realLife: 'Disks come as an SSD (no moving parts, very fast) or an older spinning hard drive. Both keep files without power.',
@@ -96,6 +154,13 @@ TL.registerLesson({
           size: 64,
           note: 'Each dot is three numbers: how much red, green and blue light, from 0 to 255. The graphics card works these numbers out for millions of dots, many times a second.',
         },
+        {
+          kind: 'viz',
+          viz: 'table',
+          title: 'Graphics card: what goes in, what comes out',
+          columns: ['It takes in', 'It does', 'It gives out'],
+          rows: [['Shapes, colours and pictures (from the CPU)', 'Works out the colour of every dot, thousands at the same time', 'A finished picture, about 60 times a second']],
+        },
       ],
     },
     {
@@ -103,6 +168,16 @@ TL.registerLesson({
       show: { nodes: ['screen'], links: ['gpu-screen'] },
       highlight: ['screen'],
       packets: [{ path: ['gpu', 'screen'], color: '#c084fc', label: 'picture' }],
+      cards: [
+        {
+          kind: 'viz',
+          viz: 'table',
+          title: 'Screen: what goes in, what comes out',
+          columns: ['It takes in', 'It does', 'It gives out'],
+          rows: [['The colour of every dot (from the graphics card)', 'Lights up each dot with that colour, and redraws the whole picture again and again', 'Light you can see']],
+          note: 'Most screens redraw 60 times a second (60 Hz). Gaming screens can do 144 or more.',
+        },
+      ],
     },
     {
       caption:
@@ -112,6 +187,19 @@ TL.registerLesson({
       packets: [
         { path: ['keyboard', 'cpu'], color: '#a3e635', label: 'key' },
         { path: ['mouse', 'cpu'], color: '#a3e635', label: 'click' },
+      ],
+      cards: [
+        {
+          kind: 'viz',
+          viz: 'table',
+          title: 'Inputs: what they send',
+          columns: ['Part', 'You do', 'It sends to the CPU'],
+          rows: [
+            ['Keyboard', 'Press and release a key', '"key A pressed", then "key A released"'],
+            ['Mouse', 'Move it, or click', '"moved 5 right, 2 down", "left button clicked"'],
+          ],
+          note: 'Inputs only send. They report what you did, and the CPU decides what it means.',
+        },
       ],
     },
     {
@@ -131,6 +219,17 @@ TL.registerLesson({
           { op: '→' },
           { t: 'Router', sub: 'and on to the internet', tone: 'green' },
         ],
+        {
+          kind: 'viz',
+          viz: 'table',
+          title: 'Wi-Fi chip: what goes in, what comes out',
+          columns: ['Operation', 'What happens'],
+          rows: [
+            ['send(data)', 'Turns the data into radio waves and sends them to the router'],
+            ['receive()', 'Catches radio waves from the router and turns them back into data'],
+          ],
+          note: 'At home, real-world speeds are often about 100 to 600 megabits per second. That is much slower than RAM, but enough for video calls and streaming.',
+        },
       ],
       realLife:
         'The Wi-Fi chip is often a tiny part soldered onto the motherboard, with a small antenna hidden in the case. Laptops and phones always have one. Many desktop computers do not, and use a network cable instead.',

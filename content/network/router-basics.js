@@ -8,7 +8,7 @@ TL.registerLesson({
   steps: [
     {
       caption:
-        'This is your home router. Think of it as the front door of the house: everything going to the internet, or coming back from it, passes through here.',
+        'This is your home router. The dashed box is your home: everything inside it is yours, everything outside is the rest of the world. The router is the front door: everything going to the internet, or coming back from it, passes through here.',
       show: { nodes: ['router'] },
       highlight: ['router'],
       looksLike: { title: 'A home Wi-Fi router', src: 'img/real/router.png', alt: 'Photo of a home Wi-Fi router', caption: 'Real routers come in many shapes, but they all have power, network ports and Wi-Fi inside.' },
