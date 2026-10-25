@@ -352,3 +352,32 @@
 .pc-dim-fill { fill: var(--muted); }
 .pc-bullet { fill: none; stroke: var(--amber); stroke-width: 3; stroke-linecap: round; }
 .pc-text { fill: var(--muted); font-family: var(--mono); font-size: 9px; }
+.hy-wall, .hy-bore, .hy-water { fill: none; stroke-linecap: square; stroke-linejoin: round; }
+.hy-wall { stroke: var(--muted); }
+.hy-bore { stroke: #0a1424; }
+.hy-water { stroke: color-mix(in srgb, var(--cyan) 38%, transparent); }
+.hy-water.hot { stroke: color-mix(in srgb, var(--red) 45%, transparent); }
+.hy-flow { fill: none; stroke: var(--cyan); stroke-dasharray: 1 13; stroke-linecap: round; stroke-linejoin: round; animation: hy-flow 0.8s linear infinite; }
+.hy-flow.hot { stroke: var(--red); }
+@keyframes hy-flow { to { stroke-dashoffset: -14; } }
+.hy-pump { fill: #0a1424; stroke: var(--ink); stroke-width: 2; }
+.hy-pumparrow { fill: var(--cyan); }
+.hy-body { fill: rgba(6, 11, 20, 0.92); stroke: var(--ink); stroke-width: 2; }
+.hy-body.hot { stroke: var(--red); }
+.hy-body.hy-open { fill: none; }
+.hy-body.wet { fill: color-mix(in srgb, var(--cyan) 38%, #0a1424); }
+.hy-plate, .hy-stem, .hy-handle, .hy-flap { fill: none; stroke: var(--amber); stroke-width: 3; stroke-linecap: round; }
+.hy-flap.shut { stroke: var(--red); }
+.hy-gatebar { fill: var(--amber); }
+.hy-glow { fill: color-mix(in srgb, var(--amber) 30%, transparent); filter: drop-shadow(0 0 8px var(--amber)); }
+.hy-glow.hot { fill: color-mix(in srgb, var(--red) 40%, transparent); filter: drop-shadow(0 0 8px var(--red)); }
+.hy-tankwater { fill: color-mix(in srgb, var(--cyan) 38%, transparent); stroke: none; }
+.hy-sheet { fill: none; stroke: var(--amber); stroke-width: 3; stroke-linecap: round; }
+.hy-wheel line { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+.hy-wheel circle { fill: var(--cyan); stroke: none; }
+.hy-wheel circle.mark { fill: var(--amber); }
+.hy-wheel { transform-box: fill-box; transform-origin: center; }
+.hy-wheel.spin { animation: hy-spin 1.2s linear infinite; }
+.hy-wheel.spin.rev { animation-direction: reverse; }
+@keyframes hy-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .hy-flow, .hy-wheel.spin { animation: none; } }

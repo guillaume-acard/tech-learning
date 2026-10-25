@@ -7,7 +7,7 @@ TL.registerLesson({
   steps: [
     {
       caption:
-        'A capacitor stores a little electric charge and gives it back later. Inside are two metal plates very close together, with an insulator between them. When you connect a battery, charge piles up on one plate and leaves the other, so the plates hold opposite charges, like a tiny rechargeable battery that charges and empties in a flash.',
+        'A capacitor stores a little electric charge and gives it back later. Inside are two metal plates very close together, with an insulator between them. When you connect a battery, charge piles up on one plate and leaves the other, so the plates hold opposite charges, like a tiny rechargeable battery that charges and empties in a flash. In the water picture it is a tank split in two by a stretchy rubber sheet: water cannot cross the sheet, but water pushed in on one side stretches it and pushes water out of the other side.',
       looksLike: {
         title: 'Real capacitors',
         src: 'img/real/capacitors.png',
@@ -15,6 +15,17 @@ TL.registerLesson({
         caption: 'The tall cylinders are electrolytic capacitors, the small orange discs are ceramic ones. Bigger usually means more storage.',
       },
       cards: [
+        {
+          kind: 'viz',
+          viz: 'circuit',
+          diagram: 'hydro',
+          title: 'A capacitor is a tank with a rubber sheet',
+          cases: [
+            { part: 'tank', mode: 'charge', fill: 0.3, caption: 'Charging: the pump stretches the sheet' },
+            { part: 'tank', mode: 'full', fill: 1, caption: 'Full: sheet tight, flow stops' },
+            { part: 'tank', mode: 'discharge', fill: 0.7, caption: 'Emptying: the sheet pushes water back' },
+          ],
+        },
         { kind: 'viz', viz: 'circuit', diagram: 'symbols', items: ['capacitor', 'battery'] },
         [
           { t: 'Plate +', sub: 'holds extra charge', tone: 'amber' },
@@ -26,7 +37,7 @@ TL.registerLesson({
     },
     {
       caption:
-        'Capacity is measured in farads (F). One farad is huge, so real parts are in microfarads (µF, a millionth of a farad) or smaller. A small ceramic one might be 100 nF, a common electrolytic 100 µF. When the capacitor is full, the voltage across it equals the supply and no more current flows. It stops the steady flow of a battery, but lets changes through.',
+        'Capacity is measured in farads (F). One farad is huge, so real parts are in microfarads (µF, a millionth of a farad) or smaller. A small ceramic one might be 100 nF, a common electrolytic 100 µF. When the capacitor is full, the voltage across it equals the supply and no more current flows. It stops the steady flow of a battery, but lets changes through. In the water picture: a tight sheet blocks a steady push, but if the pump keeps pushing and pulling, the sheet flexes back and forth and the water in the pipes keeps sloshing, even though none crosses the sheet.',
       cards: [
         {
           kind: 'viz',
@@ -46,6 +57,16 @@ TL.registerLesson({
       caption:
         'A capacitor does not charge instantly. Put a resistor in front of it and the charge builds up like water filling a tank through a narrow pipe: fast at first, then slower and slower. The time it takes is set by the resistance times the capacitance, written RC. After one RC the capacitor is at about 63% of the supply, after five RC it is practically full.',
       cards: [
+        {
+          kind: 'viz',
+          viz: 'circuit',
+          diagram: 'hydro',
+          title: 'Filling the tank through a narrow pipe',
+          cases: [
+            { part: 'tank', mode: 'charge', fill: 0.1, caption: 'Just started: water rushes in' },
+            { part: 'tank', mode: 'charge', fill: 0.63, caption: 'After one RC: 63%, the flow has slowed' },
+          ],
+        },
         {
           kind: 'viz',
           viz: 'bars',
@@ -70,7 +91,7 @@ TL.registerLesson({
     },
     {
       caption:
-        'This slow filling is useful. Capacitors are used for timing, because the time to reach a level is predictable. They smooth a power supply: when the supply wobbles, the capacitor gives charge back to fill the dips and soaks up the peaks. They also sit right next to chips to supply the sudden bursts of current the chip needs, which helps keep the voltage steady.',
+        'This slow filling is useful. Capacitors are used for timing, because the time to reach a level is predictable. They smooth a power supply: when the supply wobbles, the capacitor gives charge back to fill the dips and soaks up the peaks. They also sit right next to chips to supply the sudden bursts of current the chip needs, which helps keep the voltage steady. In the water picture, it is a small tank right beside a tap: when the tap is opened suddenly, the tank gives its water at once instead of waiting for it to travel down the long pipe.',
       cards: [
         {
           kind: 'viz',

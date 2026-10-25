@@ -7,7 +7,7 @@ TL.registerLesson({
   steps: [
     {
       caption:
-        'A potentiometer, or pot, is a resistor you can adjust by hand. Inside is a strip of resistive material, called the track, with a terminal at each end. A third terminal is connected to a sliding contact, the wiper, which you move by turning a knob or pushing a slider. Moving the wiper changes where on the track you are touching.',
+        'A potentiometer, or pot, is a resistor you can adjust by hand. Inside is a strip of resistive material, called the track, with a terminal at each end. A third terminal is connected to a sliding contact, the wiper, which you move by turning a knob or pushing a slider. Moving the wiper changes where on the track you are touching. In the water picture, a pot is a tap with a knob: turn it and the opening gets wider or narrower.',
       looksLike: {
         title: 'A real potentiometer',
         src: 'img/real/potentiometer.png',
@@ -15,6 +15,16 @@ TL.registerLesson({
         caption: 'A rotary pot. The three pins at the bottom are the two ends of the track and the wiper.',
       },
       cards: [
+        {
+          kind: 'viz',
+          viz: 'circuit',
+          diagram: 'hydro',
+          title: 'A pot is a tap you turn',
+          cases: [
+            { part: 'tap', open: 0.25, caption: 'Tap almost shut: high resistance' },
+            { part: 'tap', open: 1, caption: 'Tap wide open: low resistance' },
+          ],
+        },
         { kind: 'viz', viz: 'circuit', diagram: 'symbols', items: ['resistor', 'pot'] },
         [
           { t: 'End A', sub: 'one end of the track', tone: 'cyan' },
@@ -25,7 +35,7 @@ TL.registerLesson({
     },
     {
       caption:
-        'The simplest use is as a variable resistor. Use one end and the wiper, and the resistance between them goes from 0 up to the full value of the track as you turn the knob. A 10 kΩ pot can be anything from 0 to 10 000 Ω. Put it in series with an LED and its resistor and you have a dimmer: more resistance means less current and a dimmer LED.',
+        'The simplest use is as a variable resistor. Use one end and the wiper, and the resistance between them goes from 0 up to the full value of the track as you turn the knob. A 10 kΩ pot can be anything from 0 to 10 000 Ω. Put it in series with an LED and its resistor and you have a dimmer: more resistance means less current and a dimmer LED. In the water picture, closing the tap a little lets less water through.',
       cards: [
         {
           kind: 'viz',
@@ -44,8 +54,20 @@ TL.registerLesson({
     },
     {
       caption:
-        'The more common use is as a voltage divider, with all three terminals. Connect one end to the supply, the other end to ground, and read the voltage at the wiper. At one end the wiper sits at the supply voltage, at the other end it sits at 0 V, and in between it gives a smooth range. Halfway along gives half the voltage.',
+        'The more common use is as a voltage divider, with all three terminals. Connect one end to the supply, the other end to ground, and read the voltage at the wiper. At one end the wiper sits at the supply voltage, at the other end it sits at 0 V, and in between it gives a smooth range. Halfway along gives half the voltage. In the water picture, the pressure drops steadily along a long pipe, from full at the pump to nothing at the far end. A pressure gauge fitted partway along reads the pressure at that spot: the wiper is that gauge.',
       cards: [
+        {
+          kind: 'viz',
+          viz: 'table',
+          title: 'The pressure gauge picture',
+          columns: ['Gauge position on the pipe', 'Water pressure', 'Wiper voltage (5 V supply)'],
+          rows: [
+            ['Right at the pump', 'full pressure', '5 V'],
+            ['Halfway along', 'half the pressure', '2.5 V'],
+            ['At the far end', 'no pressure', '0 V'],
+          ],
+          tone: 'cyan',
+        },
         {
           kind: 'viz',
           viz: 'bars',

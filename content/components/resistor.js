@@ -18,19 +18,32 @@ TL.registerLesson({
         {
           kind: 'viz',
           viz: 'circuit',
-          diagram: 'water',
+          diagram: 'hydro',
           title: 'Resistance is a narrow pipe',
           cases: [
-            { level: 0.8, pipe: 1, caption: 'Low resistance: lots of current' },
-            { level: 0.8, pipe: 0.2, caption: 'High resistance: little current' },
+            { part: 'resistor', pipe: 'wide', caption: 'Low resistance: lots of current' },
+            { part: 'resistor', pipe: 'narrow', caption: 'High resistance: little current' },
           ],
+        },
+        {
+          kind: 'viz',
+          viz: 'table',
+          title: 'The water picture and the circuit',
+          columns: ['Water', 'Electricity'],
+          rows: [
+            ['Pump', 'Battery'],
+            ['Pressure, the push', 'Voltage (volts)'],
+            ['Flow of water', 'Current (amps)'],
+            ['Narrow pipe', 'Resistor (ohms)'],
+          ],
+          tone: 'cyan',
         },
         { kind: 'viz', viz: 'circuit', diagram: 'symbols', items: ['resistor'] },
       ],
     },
     {
       caption:
-        'The three ideas, voltage, current and resistance, are tied together by Ohm\'s law. Current is voltage divided by resistance: amps = volts / ohms. Double the voltage and the current doubles. Double the resistance and the current is halved. It is written V = I x R, and you can rearrange it to find whichever one you do not know.',
+        'The three ideas, voltage, current and resistance, are tied together by Ohm\'s law. Current is voltage divided by resistance: amps = volts / ohms. Double the voltage and the current doubles. Double the resistance and the current is halved. It is written V = I x R, and you can rearrange it to find whichever one you do not know. In the water picture: a stronger pump (more volts) pushes more water, and a narrower pipe (more ohms) lets less through.',
       cards: [
         [
           { t: 'Current', sub: 'amps', tone: 'green' },
@@ -58,7 +71,7 @@ TL.registerLesson({
     },
     {
       caption:
-        'A resistor does not make the energy disappear. The energy it takes from the current becomes heat. Its power is volts x amps, as in the power lesson. A resistor with 7 V across it and 15 mA through it gets 7 x 0.015 = 0.1 W, a little warmth. Small resistors are rated for about a quarter of a watt. Ask them for more and they get hot, change colour and fail.',
+        'A resistor does not make the energy disappear. The energy it takes from the current becomes heat. Its power is volts x amps, as in the power lesson. A resistor with 7 V across it and 15 mA through it gets 7 x 0.015 = 0.1 W, a little warmth. Small resistors are rated for about a quarter of a watt. Ask them for more and they get hot, change colour and fail. Think of water forced through a very narrow pipe: it rubs on the walls and the pipe warms up.',
       cards: [
         {
           kind: 'viz',
@@ -76,7 +89,7 @@ TL.registerLesson({
     },
     {
       caption:
-        'Here is the most common job: protecting an LED. A 9 V battery, a red LED that needs 2 V and should get about 15 mA. The LED keeps 2 V for itself, so the resistor has to take the remaining 9 - 2 = 7 V. Ohm\'s law then gives the size: 7 V / 0.015 A = 467 Ω. Resistors only come in standard values, so choose the nearest one, 470 Ω.',
+        'Here is the most common job: protecting an LED. A 9 V battery, a red LED that needs 2 V and should get about 15 mA. The LED keeps 2 V for itself, so the resistor has to take the remaining 9 - 2 = 7 V. Ohm\'s law then gives the size: 7 V / 0.015 A = 467 Ω. Resistors only come in standard values, so choose the nearest one, 470 Ω. In the water picture, the LED is a valve that takes 2 units of pressure, so the narrow pipe has to use up the other 7.',
       cards: [
         {
           kind: 'viz',

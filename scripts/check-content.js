@@ -23,7 +23,7 @@ global.setTimeout = () => 0;
 global.matchMedia = () => ({ matches: false });
 
 const load = (f) => new Function(fs.readFileSync(path.join(root, f), 'utf8')).call(global);
-['js/util.js', 'js/engine/icons.js', 'js/engine/visuals.js', 'js/engine/hwviz.js', 'js/engine/circuits.js', 'js/engine/aiviz.js', 'js/engine/physviz.js','js/engine/worldmap-data.js', 'js/engine/worldmap-routes.js', 'js/engine/worldmap.js', 'js/engine/cards.js', 'content/topics.js'].forEach(load);
+['js/util.js', 'js/engine/icons.js', 'js/engine/visuals.js', 'js/engine/hwviz.js', 'js/engine/circuits.js', 'js/engine/hydro.js', 'js/engine/aiviz.js', 'js/engine/physviz.js','js/engine/worldmap-data.js', 'js/engine/worldmap-routes.js', 'js/engine/worldmap.js', 'js/engine/cards.js', 'content/topics.js'].forEach(load);
 const TL = global.TL;
 
 // Scene files reference browser-only classes lazily; lesson files only need TL.registerLesson and scene globals.

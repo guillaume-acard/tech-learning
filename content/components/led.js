@@ -31,8 +31,18 @@ TL.registerLesson({
     },
     {
       caption:
-        'The word diode matters. A diode is a one-way valve for current: it lets current through in one direction and blocks it in the other. The LED symbol shows this: the triangle points the way current may flow, and the bar is the wall that stops it coming back. The little arrows mean it gives out light.',
+        'The word diode matters. A diode is a one-way valve for current: it lets current through in one direction and blocks it in the other. The LED symbol shows this: the triangle points the way current may flow, and the bar is the wall that stops it coming back. The little arrows mean it gives out light. In the water picture, a diode is a one-way valve: a flap that water can push open one way and that slams shut the other way.',
       cards: [
+        {
+          kind: 'viz',
+          viz: 'circuit',
+          diagram: 'hydro',
+          title: 'The valve picture',
+          cases: [
+            { part: 'valve', state: 'forward', caption: 'Right way: the flap opens, water flows' },
+            { part: 'valve', state: 'reversed', caption: 'Backwards: the flap shuts, no flow' },
+          ],
+        },
         {
           kind: 'viz',
           viz: 'circuit',
@@ -54,8 +64,15 @@ TL.registerLesson({
     },
     {
       caption:
-        'An LED will not light just because the voltage is above zero. It needs a minimum push before it conducts at all, called its forward voltage. Below that, nothing flows. The value depends on the colour, because the colour comes from the material. A red LED needs about 2 V, a blue or white one needs about 3 V.',
+        'An LED will not light just because the voltage is above zero. It needs a minimum push before it conducts at all, called its forward voltage. Below that, nothing flows. The value depends on the colour, because the colour comes from the material. A red LED needs about 2 V, a blue or white one needs about 3 V. In the water picture, the valve has a spring: a weak push cannot open the flap at all.',
       cards: [
+        {
+          kind: 'viz',
+          viz: 'circuit',
+          diagram: 'hydro',
+          title: 'The spring needs enough push',
+          cases: [{ part: 'valve', state: 'dark', caption: 'Weak pump: the flap stays shut' }],
+        },
         {
           kind: 'viz',
           viz: 'table',
@@ -79,8 +96,15 @@ TL.registerLesson({
     },
     {
       caption:
-        'Above the forward voltage, the LED behaves very differently from a lamp. A small extra push makes the current rise steeply. An LED has almost no resistance of its own to hold it back, so it cannot limit its own current. A typical LED is happy at about 20 mA. Several times that, and it overheats and burns out in a flash.',
+        'Above the forward voltage, the LED behaves very differently from a lamp. A small extra push makes the current rise steeply. An LED has almost no resistance of its own to hold it back, so it cannot limit its own current. A typical LED is happy at about 20 mA. Several times that, and it overheats and burns out in a flash. In the water picture, once the flap is open it offers almost no resistance, so a strong pump sends a flood through it.',
       cards: [
+        {
+          kind: 'viz',
+          viz: 'circuit',
+          diagram: 'hydro',
+          title: 'A valve connected straight to the pump',
+          cases: [{ part: 'valve', state: 'noresistor', caption: 'No narrow pipe: a flood' }],
+        },
         {
           kind: 'viz',
           viz: 'circuit',
@@ -105,8 +129,15 @@ TL.registerLesson({
     },
     {
       caption:
-        'The fix is simple. Put a resistor in the loop, in a row with the LED. The resistor takes the extra voltage and limits the current to a safe value. The next lesson shows how to choose it. For now, remember the rule: an LED always needs a resistor, the right way round, with a battery above its forward voltage.',
+        'The fix is simple. Put a resistor in the loop, in a row with the LED. The resistor takes the extra voltage and limits the current to a safe value. The next lesson shows how to choose it. For now, remember the rule: an LED always needs a resistor, the right way round, with a battery above its forward voltage. In the water picture, that is a pump, a narrow pipe and a one-way valve in a loop.',
       cards: [
+        {
+          kind: 'viz',
+          viz: 'circuit',
+          diagram: 'hydro',
+          title: 'The standard circuit as water',
+          cases: [{ part: 'valve', state: 'forward', caption: 'Pump, narrow pipe and valve in a loop' }],
+        },
         {
           kind: 'viz',
           viz: 'circuit',

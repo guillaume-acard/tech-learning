@@ -80,12 +80,22 @@ TL.registerLesson({
     },
     {
       caption:
-        'So the control signal is just a voltage level at the gate. Gate low: the path from drain to source is blocked, like an open switch. Gate high: the path conducts, like a closed switch. Same loop as before, but the signal replaces your finger.',
+        'So the control signal is just a voltage level at the gate. Gate low: the path from drain to source is blocked, like an open switch. Gate high: the path conducts, like a closed switch. Same loop as before, but the signal replaces your finger. In the water picture, a transistor is a sluice gate in a big pipe, lifted by pressure from a thin control pipe: a small push on the gate lets a large flow through.',
       show: { nodes: ['control'], links: ['control-transistor'] },
       highlight: ['control', 'control-transistor', 'transistor'],
       labels: { control: 'Control: low or high', transistor: 'Switches the path' },
       packets: [{ path: ['control', 'transistor'], color: '#ffa31a', label: 'control' }],
       cards: [
+        {
+          kind: 'viz',
+          viz: 'circuit',
+          diagram: 'hydro',
+          title: 'The water picture: a sluice gate',
+          cases: [
+            { part: 'gate', on: false, caption: 'Gate pipe not pushed: gate shut' },
+            { part: 'gate', on: true, caption: 'Gate pipe pushed: gate lifts' },
+          ],
+        },
         {
           kind: 'viz',
           viz: 'circuit',
